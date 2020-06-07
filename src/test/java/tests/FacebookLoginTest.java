@@ -19,7 +19,7 @@ import static helpers.Environment.*;
 import static io.qameta.allure.Allure.step;
 
 
-@Feature("Testing account profile")
+@Feature("Testing account profile Facebook")
 @Tag ("facebook")
 
 public class FacebookLoginTest extends TestBase {
@@ -31,7 +31,7 @@ public class FacebookLoginTest extends TestBase {
     void successfulLogin () {
 
     //arrange
-        step("Open home page", ()->{
+        step("Open the main page", ()->{
             open(urlFacebook);
         });
 

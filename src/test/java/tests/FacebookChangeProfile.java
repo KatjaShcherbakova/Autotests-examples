@@ -1,5 +1,6 @@
 package tests;
 
+import Steps.BasicStep;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -13,20 +14,21 @@ import static org.junit.Assert.assertEquals;
 import static helpers.Environment.*;
 
 
-@Feature("Testing account profile")
+@Feature("Testing account profile Facebook")
 @Tag("facebook")
 
 public class FacebookChangeProfile extends TestBase{
+
+    private final BasicStep steps = new BasicStep();
 
     @Test
     @Story("Make changes to the profile, check the changes are saved")
     @DisplayName ("Positive test, verification of changes in the profile")
 
     void succesfulChangeProfileData(){
-        open(urlFacebook);
+        steps.openMainPage(urlFacebook);
+        steps.authorisationFacebook(emailFacebook,passwordFacebook);
 
-//        FacebookLoginTest login= new FacebookLoginTest();
-//        login.successfulLogin();
         assertEquals (true,false);
 
 

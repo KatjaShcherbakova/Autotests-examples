@@ -51,3 +51,15 @@ task facebook_tests(type: Test) {
         includeTags 'facebook'
     }
 }
+task yandex_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags 'yandex'
+    }
+}
+
+task all_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags 'facebook'
+        includeTags 'yandex'
+    }
+}
