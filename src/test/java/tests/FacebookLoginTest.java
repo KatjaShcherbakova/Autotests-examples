@@ -1,8 +1,6 @@
 package tests;
 
 
-
-import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
@@ -12,9 +10,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.by;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static helpers.Environment.*;
 import static io.qameta.allure.Allure.step;
 
@@ -43,9 +39,12 @@ public class FacebookLoginTest extends TestBase {
 
         });
      //assert
+
         step("Login validation", ()->{
-            $("html").shouldHave(text("Testguru"));
-//        $(byText("Testguru")).shouldBe(visible);
+//           possible variants for asserts
+//            $(by("data-type", "type_user")).shouldHave(text(nameFacebook), text(surnameFacebook));
+//            $("body").shouldHave(text(nameFacebook+" "+surnameFacebook));
+            $$("body").find(visible).shouldHave(text(nameFacebook),text(surnameFacebook));
 
         });
 

@@ -2,15 +2,15 @@ package tests;
 
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
-import io.qameta.allure.junit4.DisplayName;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
+import static helpers.Environment.itemYandexMarket;
+import static helpers.Environment.urlYandexMarket;
 import static io.qameta.allure.Allure.step;
-
-import static helpers.Environment.*;
 
 @Feature("Search item on YandexMarket")
 @Tag("yandex")
