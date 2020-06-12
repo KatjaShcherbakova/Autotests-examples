@@ -39,6 +39,7 @@ public class CustomWebDriver implements WebDriverProvider {
         chromeOptions.addArguments("--disable-notifications");
         chromeOptions.addArguments("--disable-infobars");
         chromeOptions.addArguments("--lang=en");
+        chromeOptions.addArguments("--window-size=500,500");
 
         return chromeOptions;
     }
