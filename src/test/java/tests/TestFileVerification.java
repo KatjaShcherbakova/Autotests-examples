@@ -41,7 +41,7 @@ public class TestFileVerification {
         $(byName("j_password")).val(jenkinsPassword).pressEnter();
         $(withText(jenkinsLogin)).shouldBe(Condition.visible);
 
-        open("https://jenkins.autotests.cloud/view/QA.GURU%20students/job/Katja_FilesTests/ws/src/test/resources/files/");
+        open("https://jenkins.autotests.cloud/job/Katja_AllTests/ws/src/test/resources/");
 
         File actuelFile= $("[href='ExelTestFile.xlsx']").download();
         XLS xls = new XLS(actuelFile);
