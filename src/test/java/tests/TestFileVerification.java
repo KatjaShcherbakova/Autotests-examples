@@ -33,7 +33,6 @@ public class TestFileVerification extends TestBase {
     void successfulSearchTextinFileExel()  throws IOException {
 
         String expectedFileText = "Черепанова";
-
         String jenkinsLogin = "testuser";
         String jenkinsPassword = "testpassword%";
 
@@ -48,13 +47,11 @@ public class TestFileVerification extends TestBase {
             open("https://jenkins.autotests.cloud/job/Katja_AllTests/ws/src/test/resources/");
         });
 
-        step("Download the file and read the information from it",()->{
-            File actuelFile= $("[href='ExelTestFile.xlsx']").download();
-            XLS xls = new XLS(actuelFile);
-        });
-
-        step("Check expected file text with actual file text",()->{
-            assertThat(xls, XLS.containsText(expectedFileText));
+        step("Download the file, read the text from it and check the actual file text with the expected file text"
+                ,()->{
+             File actuelFile= $("[href='ExelTestFile.xlsx']").download();
+             XLS xls = new XLS(actuelFile);
+             assertThat(xls, XLS.containsText(expectedFileText));
         });
 
     }

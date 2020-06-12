@@ -52,6 +52,26 @@ tasks.withType(Test) {
     systemProperties = System.properties
 }
 
+
+
+task file_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags 'file'
+    }
+}
+
+task facebook_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags 'facebook'
+         }
+}
+
+task yandex_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags 'yandex'
+    }
+}
+
 task all_tests(type: Test) {
     useJUnitPlatform {
         includeTags 'facebook'
