@@ -21,18 +21,18 @@ public class YandexMarketTest extends TestBase{
     @Story("Searching item on YandexMarket")
     @DisplayName("Positive test by searching item on YandexMarket")
 
-    void succesfulSearchYandexMArket (){
+    void succesfulSearchYandexMarket (){
 
         // arrange
         step("Open the main page",()->{
             open(urlYandexMarket);
         });
         //act
-        step ("Input itemYandexMarket",()->{
-            $("#header-search").setValue(itemYandexMarket).pressEnter();
+        step ("Input itemYandexMarket in the search bar",()->{
+            $("#header-search").val(itemYandexMarket).pressEnter();
         });
         step("Click the first link",()->{
-            $(".n-snippet-cell2__title").click();
+            $("[data-autotest-id='product-snippet'] img").click();
         });
         //assert
         step("Search the result, it should have itemYandexMarket",()->{

@@ -56,5 +56,6 @@ task all_tests(type: Test) {
     useJUnitPlatform {
         includeTags 'facebook'
         includeTags 'yandex'
+        includeTags 'file'
     }
 }
