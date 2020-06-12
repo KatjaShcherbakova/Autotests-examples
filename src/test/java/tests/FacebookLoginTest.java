@@ -32,7 +32,7 @@ public class FacebookLoginTest extends TestBase {
         });
 
     //act
-        step("Enter the emailFacebook and the passwordFacebook in the login form",()->{
+        step("Input the emailFacebook and the passwordFacebook in the login form",()->{
             $(by("data-testid", "royal_email")).setValue(emailFacebook);
             $(by("data-testid", "royal_pass")).setValue(passwordFacebook);
             $(by("data-testid", "royal_login_button")).click();

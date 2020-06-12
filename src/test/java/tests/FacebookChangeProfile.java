@@ -41,7 +41,7 @@ public class FacebookChangeProfile extends TestBase{
            $(byText("Hometown")).click();
         } );
 
-        step("Enter the name of the hometown ",()->{
+        step("Input the name of the hometown ",()->{
            $("#hometown").click();
            $("#pagelet_hometown label>[aria-autocomplete='list']").setValue("Saint Petersburg");
 //          the variant to enter the data

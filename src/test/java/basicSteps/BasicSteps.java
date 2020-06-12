@@ -16,7 +16,7 @@ public class BasicSteps {
         open(url);
     }
 
-    @Step("Enter the emailFacebook and the passwordFacebook in the login form")
+    @Step("Input the emailFacebook and the passwordFacebook in the login form")
      public void authorisationFacebook(String email, String password){
         parameter ("Email:", email);
         parameter("Password:", password);
