@@ -1,5 +1,6 @@
 package tests;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -13,31 +14,36 @@ import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.parameter;
 import static io.qameta.allure.Allure.step;
 
-@Feature("Test TinkoffBankPage")
-@Tag("tinkoff")
+  @Feature("Test TinkoffBankPage")
+  @Tag("tinkoff")
 
   public class TinkoffTest extends TestBase{
+
   private final static String CURRENCY = "Доллары США";
   private final static String AMOUNT  = "5000";
   private final static String HoverTextWithoutCursor= "за 24 месяца я накоплю";
   private final static String HoverTextWithCursor= "пополнения";
 
 
-    @Test
-    @Story("TinkoffBank deposit calculator on the website")
-    @DisplayName("Positive test with calculator form")
 
-    void successfulTestTinkoff() {
+  @Test
+  @Story("TinkoffBank deposit calculator on the website")
+  @DisplayName("Positive test with calculator form")
+
+    void successfulTestCalculatorTinkoff() {
+        Configuration.fastSetValue=true;
+
         parameter("Валюта:", CURRENCY);
         parameter("Сумма:", AMOUNT);
 
         step("Открываем главную страницу", () -> {
+
             open("https://www.tinkoff.ru/");
         });
         step("Кликаем на 'Вклады'", () -> {
             $(byText("Вклады")).closest("a").click();
         });
-        //для заморозки dom используем в консоли команду setTimeout(function(){debugger},5000)
+        //для заморозки dom используем в консоли команду setTimeout(function(){debugger},5000) or F8
         step("В drop-down 'Валюта 'выбираем валюту $", () -> {
             $("[data-qa-type='uikit/inputBox']", 2).click();
             $("[data-qa-type='uikit/scroll']").$(byText(CURRENCY)).click();
@@ -48,14 +54,15 @@ import static io.qameta.allure.Allure.step;
         });
         step("Устанавливаем сумму вклада 5000", () -> {
             $("[data-qa-type='uikit/inputBox.inputContainer'] input").setValue(AMOUNT);
+
         });
         step("Проверяем, что сумма устанавилась корректно", () -> {
             $("[data-qa-type='uikit/inputBox.inputContainer'] input").shouldHave(value(AMOUNT));
         });
 }
-     @Test
-     @Story("TinkoffBAnk Website, Hover on Page")
-     @DisplayName("Positive Test,the hover shows the expected text")
+  @Test
+  @Story("TinkoffBAnk Website, Hover on Page")
+  @DisplayName("Positive Test,the hover shows the expected text")
 
      void successfulTestWithHover() {
         parameter(" Текст в Hover до наведения курсора:", HoverTextWithoutCursor);
@@ -76,9 +83,9 @@ import static io.qameta.allure.Allure.step;
          });
      }
 
-      @Test
-      @Story("TinkoffBAnk Website, checkbox on the page")
-      @DisplayName("Positive Test,remove one of the flags in the checkbox")
+  @Test
+  @Story("TinkoffBAnk Website, checkbox on the page")
+  @DisplayName("Positive Test,remove one flag in the checkbox")
 
       void successfulRemoveOneFlagCheckbox(){
          step("Открываем страницу с калькулятором вклада",()->{
@@ -94,9 +101,9 @@ import static io.qameta.allure.Allure.step;
         });
 
          }
-     @Test
-     @Story("TinkoffBank Website, checkbox on the page")
-     @DisplayName("Positive Test,remove all the flags in the checkbox")
+  @Test
+  @Story("TinkoffBank Website, checkbox on the page")
+  @DisplayName("Positive Test,remove all flags in the checkbox")
 
      void successfulRemoveAllFlagsCheckbox(){
          step("Открываем страницу с калькулятором вклада",()->{

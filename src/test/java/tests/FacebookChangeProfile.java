@@ -24,8 +24,9 @@ public class FacebookChangeProfile extends TestBase{
 
     private final BasicStepsFacebook steps = new BasicStepsFacebook();
 
-    @Disabled
     @Test
+    @Disabled
+
     @Story("Make changes to the profile, check the changes are saved")
     @DisplayName ("Positive test, verification of changes in the profile")
 

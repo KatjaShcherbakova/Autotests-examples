@@ -20,8 +20,9 @@ import static io.qameta.allure.Allure.step;
 @Tag ("facebook")
 
 public class FacebookLoginTest extends TestBase {
-    @Disabled
     @Test
+    @Disabled
+
     @Story("Login to existing account")
     @DisplayName("Positive test, account verification XXXX")
 
@@ -42,10 +43,8 @@ public class FacebookLoginTest extends TestBase {
      //assert
 
         step("Login validation", ()->{
-//           possible variants for asserts
-//            $(by("data-type", "type_user")).shouldHave(text(nameFacebook), text(surnameFacebook));
-//            $("body").shouldHave(text(nameFacebook+" "+surnameFacebook));
-            $$("body").find(visible).shouldHave(text(nameFacebook),text(surnameFacebook));
+
+            $$("body").shouldHave(text(nameFacebook),text(surnameFacebook));
 
         });
 
