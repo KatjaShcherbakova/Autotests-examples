@@ -1,5 +1,6 @@
 package tests;
 
+import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
@@ -8,8 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.parameter;
 import static io.qameta.allure.Allure.step;
 
@@ -17,12 +17,14 @@ import static io.qameta.allure.Allure.step;
 @Tag("tinkoff")
 
   public class TinkoffTest extends TestBase{
-  private static String CURRENCY = "Доллары США";
-  private static String AMOUNT  = "5000";
+  private final static String CURRENCY = "Доллары США";
+  private final static String AMOUNT  = "5000";
+  private final static String HoverTextWithoutCursor= "за 24 месяца я накоплю";
+  private final static String HoverTextWithCursor= "пополнения";
 
 
     @Test
-    @Story("TinkoffBank test")
+    @Story("TinkoffBank deposit calculator on the website")
     @DisplayName("Positive test with calculator form")
 
     void successfulTestTinkoff() {
@@ -56,37 +58,63 @@ import static io.qameta.allure.Allure.step;
      @DisplayName("Positive Test,the hover shows the expected text")
 
      void successfulTestWithHover() {
+        parameter(" Текст в Hover до наведения курсора:", HoverTextWithoutCursor);
+        parameter("Текст в Hover с наведенным курсором",HoverTextWithCursor);
+
          step("Открываем страницу с калькулятором вклада", () -> {
              open("https://www.tinkoff.ru/deposit/");
          });
          step("Проверяем наличие hover с нужным текстом", () -> {
              $("div[data-qa-file=Pie]").scrollIntoView(true);
-             $("div[data-qa-file=Pie]").shouldHave(text("за 24 месяца я накоплю"));
+             $("div[data-qa-file=Pie]").shouldHave(text(HoverTextWithoutCursor));
          });
          step("Наводим курсор на hover", () -> {
              $("div[data-qa-file=Pie]").hover();
          });
          step("Проверяем, что текст изменился на ожидаемый", () -> {
-             $("div[data-qa-file=Pie]").shouldHave(text("пополнения"));
+             $("div[data-qa-file=Pie]").shouldHave(text(HoverTextWithCursor));
          });
      }
 
       @Test
-      @Story("TinkoffBAnk Website, Checkbox on Page")
-      @DisplayName("Positive Test,remove the flag in the checkbox")
+      @Story("TinkoffBAnk Website, checkbox on the page")
+      @DisplayName("Positive Test,remove one of the flags in the checkbox")
 
-      void successfulTestWithCheckbox(){
-        step("Открываем страницу с калькулятором вклада",()->{
+      void successfulRemoveOneFlagCheckbox(){
+         step("Открываем страницу с калькулятором вклада",()->{
             open("https://www.tinkoff.ru/deposit/");
         });
-        step("Снимаем флаги в checkbox",()->{
-            $("div[data-qa-file=Pie]").scrollIntoView(true);
+         step("Снимаем флаг в checkbox",()->{
+            $("[data-qa-type='uikit/checkbox']").scrollIntoView(true);
             $("[data-qa-type='uikit/checkbox']").click();
         });
-        step("Проверяем, что флаг снят",()->{
+         step("Проверяем, что флаг снят",()->{
             $("[aria-checked]").shouldNotBe(checked);
 
         });
 
          }
+     @Test
+     @Story("TinkoffBank Website, checkbox on the page")
+     @DisplayName("Positive Test,remove all the flags in the checkbox")
+
+     void successfulRemoveAllFlagsCheckbox(){
+         step("Открываем страницу с калькулятором вклада",()->{
+            open("https://www.tinkoff.ru/deposit/");
+        });
+         step("Снимаем все флаги в checkbox",()->{
+            $("[data-qa-type='uikit/checkbox']").scrollIntoView(true);
+         for (SelenideElement checkbox : $$("[data-qa-type='uikit/checkbox']"))
+            {checkbox.click();
+            }
+        });
+
+         step("Проверяем, что все флаги сняты",()->{
+            for (SelenideElement checkbox : $$("[aria-checked]"))
+            {checkbox.shouldNotBe(checked);
+            }
+
+        });
+
+    }  
 }
