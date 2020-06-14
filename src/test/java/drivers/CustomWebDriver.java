@@ -1,5 +1,6 @@
 package drivers;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverProvider;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -39,7 +40,8 @@ public class CustomWebDriver implements WebDriverProvider {
         chromeOptions.addArguments("--disable-notifications");
         chromeOptions.addArguments("--disable-infobars");
         chromeOptions.addArguments("--lang=en");
-        chromeOptions.addArguments("--window-size=500,500");
+//        chromeOptions.addArguments("--window-size=500,500");
+        Configuration.browserSize = "1920x1080";
 
         return chromeOptions;
     }

@@ -71,11 +71,17 @@ task yandex_tests(type: Test) {
         includeTags 'yandex'
     }
 }
+task tinkoff_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags 'tinkoff'
+    }
+}
 
 task all_tests(type: Test) {
     useJUnitPlatform {
         includeTags 'facebook'
         includeTags 'yandex'
         includeTags 'file'
+        includeTags 'tinkoff'
     }
 }

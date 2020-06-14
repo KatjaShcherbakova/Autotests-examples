@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selectors.by;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.parameter;
-public class BasicSteps {
+public class BasicStepsFacebook {
 
     @Step("Open the main page")
     public void openMainPage(String url){

@@ -1,9 +1,10 @@
 package tests;
 
 
-import basicSteps.BasicSteps;
+import basicSteps.BasicStepsFacebook;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -21,8 +22,9 @@ import static io.qameta.allure.Allure.step;
 
 public class FacebookChangeProfile extends TestBase{
 
-    private final BasicSteps steps = new BasicSteps();
+    private final BasicStepsFacebook steps = new BasicStepsFacebook();
 
+    @Disabled
     @Test
     @Story("Make changes to the profile, check the changes are saved")
     @DisplayName ("Positive test, verification of changes in the profile")

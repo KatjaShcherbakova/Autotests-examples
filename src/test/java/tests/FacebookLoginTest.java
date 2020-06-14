@@ -3,6 +3,7 @@ package tests;
 
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ import static io.qameta.allure.Allure.step;
 @Tag ("facebook")
 
 public class FacebookLoginTest extends TestBase {
-
+    @Disabled
     @Test
     @Story("Login to existing account")
     @DisplayName("Positive test, account verification XXXX")
