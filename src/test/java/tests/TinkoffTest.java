@@ -25,12 +25,12 @@ import static io.qameta.allure.Allure.step;
   private final static String HoverTextWithCursor= "пополнения";
 
 
-
   @Test
   @Story("TinkoffBank deposit calculator on the website")
   @DisplayName("Positive test with calculator form")
 
     void successfulTestCalculatorTinkoff() {
+
         Configuration.fastSetValue=true;
 
         parameter("Валюта:", CURRENCY);
@@ -45,6 +45,7 @@ import static io.qameta.allure.Allure.step;
         });
         //для заморозки dom используем в консоли команду setTimeout(function(){debugger},5000) or F8
         step("В drop-down 'Валюта 'выбираем валюту $", () -> {
+            $("[data-qa-type='uikit/inputBox']", 2).scrollIntoView(true);
             $("[data-qa-type='uikit/inputBox']", 2).click();
             $("[data-qa-type='uikit/scroll']").$(byText(CURRENCY)).click();
         });

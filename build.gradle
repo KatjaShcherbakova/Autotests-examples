@@ -60,11 +60,6 @@ task file_tests(type: Test) {
     }
 }
 
-task facebook_tests(type: Test) {
-    useJUnitPlatform {
-        includeTags 'facebook'
-         }
-}
 
 task yandex_tests(type: Test) {
     useJUnitPlatform {
@@ -79,7 +74,6 @@ task tinkoff_tests(type: Test) {
 
 task all_tests(type: Test) {
     useJUnitPlatform {
-        includeTags 'facebook'
         includeTags 'yandex'
         includeTags 'file'
         includeTags 'tinkoff'

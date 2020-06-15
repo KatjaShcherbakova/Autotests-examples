@@ -1,6 +1,5 @@
 package drivers;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverProvider;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -35,20 +34,17 @@ public class CustomWebDriver implements WebDriverProvider {
 
     private ChromeOptions getChromeOptions() {
         ChromeOptions chromeOptions = new ChromeOptions();
-
         chromeOptions.addArguments("--no-sandbox");
         chromeOptions.addArguments("--disable-notifications");
         chromeOptions.addArguments("--disable-infobars");
         chromeOptions.addArguments("--lang=en");
-//        chromeOptions.addArguments("--window-size=500,500");
-        Configuration.browserSize = "1920x1080";
 
         return chromeOptions;
     }
 
     private URL getRemoteWebdriverUrl() {
         try {
-            return new URL( "http://" + System.getProperty("selenoid_url") + ":4444/wd/hub/");
+            return new URL( "https://user1:1234@" + System.getProperty("selenoid_url") + ":4444/wd/hub/");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
