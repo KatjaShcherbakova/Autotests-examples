@@ -26,7 +26,7 @@ public class CustomWebDriver implements WebDriverProvider {
         capabilities.setCapability(ChromeOptions.CAPABILITY, getChromeOptions());
         WebDriverManager.chromedriver().setup();
 
-        if(System.getProperty("selenoid_url") != null) {
+        if(remoteDriverUrl != null) {
             return new RemoteWebDriver(getRemoteWebdriverUrl(), capabilities);
         } else {
             return new ChromeDriver(capabilities);

@@ -24,7 +24,6 @@ class TestBase {
 //        System.setProperty("selenoid_url", "selenoid.autotests.cloud"); // emulate terminale -Dkey=value
         Configuration.timeout = 6000;
         Configuration.browser = CustomWebDriver.class.getName();
-
     }
 
     @AfterEach
