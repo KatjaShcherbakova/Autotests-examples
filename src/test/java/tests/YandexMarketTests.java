@@ -15,7 +15,7 @@ import static io.qameta.allure.Allure.step;
 
 @Feature("Search item on YandexMarket")
 @Tag("yandex")
-public class YandexMarketTest extends TestBase{
+public class YandexMarketTests extends TestBase{
 
 
     @Test

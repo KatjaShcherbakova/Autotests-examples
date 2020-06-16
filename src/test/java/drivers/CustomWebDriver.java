@@ -12,6 +12,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import static com.codeborne.selenide.Browsers.CHROME;
+import static helpers.Environment.remoteDriverUrl;
 
 
 public class CustomWebDriver implements WebDriverProvider {
@@ -44,7 +45,7 @@ public class CustomWebDriver implements WebDriverProvider {
 
     private URL getRemoteWebdriverUrl() {
         try {
-            return new URL( "https://user1:1234@" + System.getProperty("selenoid_url") + ":4444/wd/hub/");
+            return new URL(remoteDriverUrl);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

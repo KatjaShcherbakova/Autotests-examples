@@ -94,8 +94,7 @@ public class IndeedTest extends TestBase {
             $(".state-picker-button").click();
         });
 
-        //remember the job name
-        String jobSaved= $("#vjs-jobinfo>div").sibling(0).getText();
+       String jobSaved=  $("#vjs-jobinfo>div").sibling(0).getText();
 
         step(" Check the account that the vacancy is saved",()->{
              $(".gnav-ProfileNavLinks>div").sibling(0).click();
