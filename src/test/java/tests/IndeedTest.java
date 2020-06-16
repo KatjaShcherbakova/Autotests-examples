@@ -29,7 +29,7 @@ public class IndeedTest extends TestBase {
     @DisplayName("Positive test, login with email and password")
 
   void successfulLogInIndeed(){
-        step("Open main Indeed  webpage ",()->{
+        step("Open main Indeed  webpage",()->{
             open(urlIndeed);
         });
         step("Input email and password in the login form",()->{
