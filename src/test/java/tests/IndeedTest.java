@@ -47,11 +47,11 @@ public class IndeedTest extends TestBase {
 
 
      @Test
-     @Story("Search job on Indeed")
+     @Story("Search  for a job on Indeed")
      @DisplayName("Positive Test, search job on Indeed without registration")
 
   void successfulSearchJobWihoutLogin(){
-        parameter(" Job for searchin:", jobIndeed);
+        parameter(" Job for searching:", jobIndeed);
         parameter("Where`re we looking for the job:", whereJobIndeed);
 
 
@@ -69,18 +69,18 @@ public class IndeedTest extends TestBase {
 
   }
     @Test
-    @Story("Search job on Indeed")
+    @Story("Search for a job on Indeed")
     @DisplayName("Positive Test, save first vacancy in the account")
 
     void successfullSaveVacancy(){
-        parameter(" Job for searchin:", jobIndeed);
+        parameter(" Job for searching:", jobIndeed);
         parameter("Where`re we looking for the job:", whereJobIndeed);
 
         steps.openUrlIndeed(urlIndeed);
         steps.inputInLoginFormIndeed(emailIndeed,passwordIndeed);
         steps.loginVerificationIndeed(emailIndeed);
 
-        step("Input jobname  and region into the search field",()->{
+        step("Input the  jobname  and the region into the search field",()->{
             $("#text-input-what").setValue(jobIndeed);
             $("#text-input-where").setValue(whereJobIndeed).pressEnter();
         });
