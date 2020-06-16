@@ -73,6 +73,8 @@ public class IndeedTest extends TestBase {
     @DisplayName("Positive Test, save first vacancy in the account")
 
     void successfullSaveVacancy(){
+        parameter(" Job for searchin:", jobIndeed);
+        parameter("Where`re we looking for the job:", whereJobIndeed);
 
         steps.openUrlIndeed(urlIndeed);
         steps.inputInLoginFormIndeed(emailIndeed,passwordIndeed);
