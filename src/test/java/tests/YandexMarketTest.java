@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static helpers.Environment.itemYandexMarket;
 import static helpers.Environment.urlYandexMarket;
@@ -30,8 +29,8 @@ public class YandexMarketTest extends TestBase{
             open(urlYandexMarket);
         });
         step ("Input itemYandexMarket in the search bar",()->{
-            $("#header-search").setValue(itemYandexMarket);
-            $(byText("Найти")).parent().click();
+            $("#header-search").setValue(itemYandexMarket).pressEnter();
+
         });
         step("Click the first link",()->{
             $("[data-autotest-id='product-snippet'] img").click();

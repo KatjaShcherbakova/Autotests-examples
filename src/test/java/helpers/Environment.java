@@ -9,7 +9,10 @@ public class Environment {
 
     urlIndeed = System.getProperty("urlIndeed","https://de.indeed.com/"),
     emailIndeed = System.getProperty("emailIndeed","cherrycat+22@mail.ru"),
-    passwordIndeed = System.getProperty("passwordIndeed","Polyris123!123");
+    passwordIndeed = System.getProperty("passwordIndeed","Polyris123!123"),
+    jobIndeed = System.getProperty("jobIndeed","software tester"),
+    whereJobIndeed = System.getProperty("jobRegionIndeed","Deutschland");
+
 
 
 

@@ -72,10 +72,17 @@ task tinkoff_tests(type: Test) {
     }
 }
 
+task indeed_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags 'indeed'
+    }
+}
+
 task all_tests(type: Test) {
     useJUnitPlatform {
         includeTags 'yandex'
         includeTags 'file'
         includeTags 'tinkoff'
+        includeTags 'indeed'
     }
 }
