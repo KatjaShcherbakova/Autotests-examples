@@ -2,6 +2,7 @@ package tests;
 
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import static io.qameta.allure.Allure.step;
 @Feature("Search item on YandexMarket")
 @Tag("yandex")
 public class YandexMarketTests extends TestBase{
+    @Disabled
     @Test
     @Story("Searching item on YandexMarket")
     @DisplayName("Positive test by searching item on YandexMarket")
