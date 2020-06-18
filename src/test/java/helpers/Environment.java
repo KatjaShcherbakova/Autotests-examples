@@ -1,7 +1,7 @@
 package helpers;
 
 public class Environment {
-    public final static String
+    public  static String
         urlYandexMarket = System.getProperty("urlYandexMarket","https://market.yandex.ru"),
         itemYandexMarket = System.getProperty("itemYandexMarket","Iphone 7"),
 
