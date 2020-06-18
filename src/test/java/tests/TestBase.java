@@ -22,6 +22,7 @@ class TestBase {
     void beforeEach() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true));
 //        System.setProperty("selenoid_url", "selenoid.autotests.cloud"); // emulate terminale -Dkey=value
+        Configuration.startMaximized=true;
         Configuration.timeout = 6000;
         Configuration.browser = CustomWebDriver.class.getName();
     }

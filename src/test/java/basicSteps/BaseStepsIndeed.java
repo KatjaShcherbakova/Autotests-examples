@@ -19,11 +19,12 @@ public class BaseStepsIndeed {
         open(url);
     }
     @Step ("Input email and password in the login form")
-    public void inputInLoginFormIndeed(String email, String password){
-        parameter("email Indeed:", email);
+    public void inputInLoginFormIndeed(String mail, String password){
+        parameter("email Indeed:", mail);
         parameter("password Indeed",password);
+
         $(byText("Anmelden")).shouldBe(visible).click();
-        $("#login-email-input").setValue(email);
+        $("#login-email-input").setValue(mail);
         $("#login-password-input").setValue(password);
         $("#login-submit-button").click();
     }

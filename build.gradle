@@ -82,7 +82,13 @@ task iscout_tests(type: Test) {
         includeTags 'iscout'
     }
 }
-
+task some_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags 'file'
+        includeTags 'tinkoff'
+        includeTags 'iscout'
+    }
+}
 task all_tests(type: Test) {
     useJUnitPlatform {
         includeTags 'yandex'
