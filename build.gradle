@@ -77,6 +77,11 @@ task indeed_tests(type: Test) {
         includeTags 'indeed'
     }
 }
+task iscout_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags 'iscout'
+    }
+}
 
 task all_tests(type: Test) {
     useJUnitPlatform {
@@ -84,5 +89,6 @@ task all_tests(type: Test) {
         includeTags 'file'
         includeTags 'tinkoff'
         includeTags 'indeed'
+        includeTags 'iscout'
     }
 }

@@ -28,7 +28,6 @@ public class YandexMarketTests extends TestBase{
         });
         step ("Input itemYandexMarket in the search bar",()->{
             $("#header-search").setValue(itemYandexMarket).pressEnter();
-
         });
         step("Click the first link",()->{
             $("[data-autotest-id='product-snippet'] img").click();
