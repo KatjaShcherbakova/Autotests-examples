@@ -15,21 +15,22 @@ import static io.qameta.allure.Allure.step;
 
 @Feature("Search item on YandexMarket")
 @Tag("yandex")
-public class YandexMarketTests extends TestBase{
+public class YandexMarketTests extends TestBase {
 //    @Disabled
     @Test
     @Story("Searching item on YandexMarket")
     @DisplayName("Positive test by searching item on YandexMarket")
-
     void succesfulSearchYandexMarket (){
-
         parameter("Item for search:", itemYandexMarket);
 
         step("Open the main page",()->{
             open(urlYandexMarket);
         });
         step ("Input itemYandexMarket in the search bar",()->{
-            $("#header-search").setValue(itemYandexMarket).pressEnter();
+            $("#header-search").setValue(itemYandexMarket);
+            $("#header-search").pressEnter();
+            sleep(6000);
+            $("#header-search").pressEnter();
         });
         step("Click the first link",()->{
             $("[data-autotest-id='product-snippet'] img").click();

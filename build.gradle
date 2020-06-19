@@ -86,7 +86,7 @@ task some_tests(type: Test) {
     useJUnitPlatform {
         includeTags 'file'
         includeTags 'tinkoff'
-        includeTags 'iscout'
+        includeTags 'yandex'
     }
 }
 task all_tests(type: Test) {

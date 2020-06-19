@@ -39,14 +39,18 @@ public class AttachmentsHelper {
 
     @Attachment(value = "Video", type = "text/html", fileExtension = ".html")
     public static String attachVideo() {
-        return "<html><body><video width='100%' height='100%' controls autoplay><source src='"
-                + getVideoUrl()
-                + "' type='video/mp4'></video></body></html>";
+        if(videoStorageUrl != null) {
+            return "<html><body><video width='100%' height='100%' controls autoplay><source src='"
+                    + getVideoUrl()
+                    + "' type='video/mp4'></video></body></html>";
+        }
+        return null;
     }
 
     public static String getVideoUrl() {
         try {
-                return new URL(videoStorageUrl + "/" + getSessionId() + ".mp4") + "";        } catch (MalformedURLException e) {
+                return new URL(videoStorageUrl + "/" + getSessionId() + ".mp4") + "";
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         return null;
