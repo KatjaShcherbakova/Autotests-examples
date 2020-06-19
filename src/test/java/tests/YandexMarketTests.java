@@ -28,7 +28,6 @@ public class YandexMarketTests extends TestBase {
         });
         step ("Input itemYandexMarket in the search bar",()->{
             $("#header-search").setValue(itemYandexMarket);
-            $("#header-search").pressEnter();
             sleep(6000);
             $("#header-search").pressEnter();
         });
