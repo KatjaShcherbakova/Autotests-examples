@@ -1,6 +1,5 @@
 package tests;
 
-import com.codeborne.selenide.Configuration;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
@@ -23,7 +22,7 @@ public class YandexMarketTests extends TestBase {
     @Story("Searching item on YandexMarket")
     @DisplayName("Positive test by searching item on YandexMarket")
     void succesfulSearchYandexMarket (){
-        Configuration.fastSetValue=true;
+
         parameter("Item for search:", itemYandexMarket);
 
         step("Open the main page",()-> {
@@ -31,10 +30,8 @@ public class YandexMarketTests extends TestBase {
         });
         step ("Input itemYandexMarket in the search bar",()-> {
             $(byName("text")).val(itemYandexMarket);
-            sleep(2000);
+            sleep(5000);
             $(byName("text")).pressEnter();
-
-//            $("#header-search").pressEnter();
         });
         step("Click the first link",()->{
             $("[data-autotest-id='product-snippet'] img").click();
