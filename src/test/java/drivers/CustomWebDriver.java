@@ -13,15 +13,18 @@ import java.net.URL;
 
 import static com.codeborne.selenide.Browsers.CHROME;
 import static helpers.Environment.remoteDriverUrl;
+import static helpers.Environment.videoStorageUrl;
 
 
 public class CustomWebDriver implements WebDriverProvider {
     @Override
     public WebDriver createDriver(DesiredCapabilities capabilities) {
-        capabilities.setBrowserName(CHROME);
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", true);
-        capabilities.setCapability("videoFrameRate", 24);
+        if(videoStorageUrl!=null) {
+            capabilities.setBrowserName(CHROME);
+            capabilities.setCapability("enableVNC", true);
+            capabilities.setCapability("enableVideo", true);
+            capabilities.setCapability("videoFrameRate", 24);
+        }
 
         capabilities.setCapability(ChromeOptions.CAPABILITY, getChromeOptions());
         WebDriverManager.chromedriver().setup();
