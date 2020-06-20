@@ -30,7 +30,7 @@ public class YandexMarketTests extends TestBase {
             open(urlYandexMarket);
         });
         step ("Input itemYandexMarket in the search bar",()-> {
-            $(byName("text")).val(itemYandexMarket).pressEnter();
+            $(byName("text")).val(itemYandexMarket);
             sleep(2000);
             $(byName("text")).pressEnter();
 
