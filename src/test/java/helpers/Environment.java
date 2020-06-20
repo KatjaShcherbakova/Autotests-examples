@@ -3,7 +3,7 @@ package helpers;
 public class Environment {
     public final static String
         urlYandexMarket = System.getProperty("urlYandexMarket","https://market.yandex.ru"),
-        itemYandexMarket = System.getProperty("itemYandexMarket","Iphone 7"),
+        itemYandexMarket = System.getProperty("itemYandexMarket","Iphone"),
 
         urlIndeed = System.getProperty("urlIndeed","https://de.indeed.com/"),
         emailIndeed = System.getProperty("emailIndeed","cherrycat+22@mail.ru"),
