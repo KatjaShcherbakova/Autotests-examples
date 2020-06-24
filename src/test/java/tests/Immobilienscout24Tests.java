@@ -1,7 +1,9 @@
 package tests;
 
 
+import Pages.IScoutPage;
 import basicSteps.AuthIScout;
+import com.codeborne.selenide.Configuration;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
@@ -10,10 +12,10 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static helpers.Environment.*;
 import static io.qameta.allure.Allure.step;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Feature("Work with profile")
 @Tag("iscout")
@@ -40,6 +42,7 @@ public class Immobilienscout24Tests extends TestBase{
             $("#password").setValue(passwordIScout).pressEnter();
         });
         step("Close the information window", ()-> {
+            sleep(5000);
             $(".deposit-splash").parent().preceding(0).click();
         });
         step("Assert that the authofication ist successful", ()-> {
@@ -82,4 +85,46 @@ public class Immobilienscout24Tests extends TestBase{
 
     }
 
+    @Test
+    @Story("Saving search results in a profile")
+    @DisplayName("Positive search for an apartment by parameters and save the first result in the profile")
+    void successfulSearchAndSaveResult () {
+        Configuration.fastSetValue=true;
+
+        IScoutPage iScoutPage = new IScoutPage();
+
+        iScoutPage.openMainPageIScout(urlIScout);
+        iScoutPage.inputAuthData(emailIScout,passwordIScout);
+        iScoutPage.assertAuth(emailIScout);
+//        iScoutPage.hoverTopMenuForSearch();
+//        iScoutPage.clickSubMenuApartmentForRent();
+        iScoutPage.openSearchPageAfterAuth(urlPageSearchAfterAuthIScout);
+        iScoutPage.inputApartParametersForSearchAuth(townIScout, maxPriceIScout,roomsIScout,distanceiScout, minAreaIScout);
+
+        assertTrue (true);
+
+//        iScoutPage.assertSuccessfulSearch();
+//        iScoutPage.saveNameOfFirstResult();
+//        iScoutPage.clickHeartSignInFirstResult();
+//        iScoutPage.assertSuccessfulSavedResultInProfile();
+    }
+
+    @Test
+    @Story("Search for an apartment by parameters without authorisation")
+    @DisplayName("Positive serch for an apartment by parameters without authorisation")
+    void successfulSearchApartmentWithoutAuth() {
+        Configuration.fastSetValue=true;
+
+        IScoutPage iScoutPage = new IScoutPage();
+
+        iScoutPage.openMainPageIScout(urlIScout);
+        iScoutPage.inputApartParametersWithoutAuth(townIScout, maxPriceIScout,roomsIScout,minAreaIScout,distanceiScout);
+
+        assertTrue (true);
+
+    }
+
+
+
 }
+

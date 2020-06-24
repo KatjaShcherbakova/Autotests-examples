@@ -4,8 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selectors;
 import io.qameta.allure.Step;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class AuthIScout {
 
@@ -17,6 +16,7 @@ public class AuthIScout {
         $(Selectors.byText("Profil")).click();
         $("#username").setValue(email).pressEnter();
         $("#password").setValue(password).pressEnter();
+        sleep(5000);
         $(".deposit-splash").parent().preceding(0).click();
         $("body").shouldHave(Condition.text(email));
     }
