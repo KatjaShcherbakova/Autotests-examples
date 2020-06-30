@@ -8,7 +8,6 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class IScoutPage {
-//    Bootstrap bootstrap = new Bootstrap();
 
     SelenideElement
         accountSign = $("#link_loginAccountLink"),
@@ -51,21 +50,24 @@ public class IScoutPage {
         closeButtonOfSplashAdv.parent().preceding(0).click();
     }
 
-    @Step("Assert the autorisation is succesful")
+    @Step("Assert the authorisation is succesful")
     public void assertAuth(String mail)
     {
         htmlBody.shouldHave(text(mail));
     }
+
     @Step("Hover on 'Suchen' on top menu")
     public void hoverTopMenuForSearch()
     {
         searchLink.hover().click();
     }
+
     @Step("Click submenu -'Mietwohnung' ")
     public void clickSubMenuApartmentForRent()
     {
         subMenuApartmentForRent.click();
     }
+
     @Step("Open page after authorisation for searching apartments")
     public void openSearchPageAfterAuth(String url) {
         open(url);
@@ -81,9 +83,16 @@ public class IScoutPage {
         fieldPriceAuth.pressTab();
 
         fieldRoomsAuth.find(".oss-dropdown-button").click();
-        dropdownRooms.$(by("data-value",rooms)).click();
-//        dropdownRooms.$(byText("ab " + rooms)).click();
-
+        sleep(6000);
+        SelenideElement room = dropdownRooms.$(byText("ab " + rooms));
+        room.click();
+        room.parent().click();
+        String sr = room.getText();
+        System.out.println(sr);
+//        sleep(2000);
+//        dropdownRooms.$(by("data-value",rooms)).click();
+//        sleep(2000);
+//        fieldRoomsAuth.find(".oss-dropdown-button>span").click();
 
 //        for(SelenideElement element:bootstrapRoomsAuth) {
 //            String innerhtml = element.getAttribute("innerHTML");

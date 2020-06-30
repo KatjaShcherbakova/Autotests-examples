@@ -1,6 +1,5 @@
 package tests;
 
-
 import basicSteps.BaseStepsIndeed;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -21,14 +20,16 @@ import static io.qameta.allure.Allure.step;
 @Tag("indeed")
 
 public class IndeedTest extends TestBase {
-
     private final BaseStepsIndeed steps = new BaseStepsIndeed();
+    String jobSaved = " ";
 
+    /*
+                PLAIN STEPS
+*/
     @Test
     @Story("Login with email and password")
     @DisplayName("Positive test, login with email and password")
-
-  void successfulLogInIndeed(){
+    void successfulLogInIndeed(){
         step("Open main Indeed  webpage",()->{
             open(urlIndeed);
         });
@@ -45,20 +46,16 @@ public class IndeedTest extends TestBase {
 
     }
 
-
      @Test
-     @Story("Search  for a job on Indeed")
+     @Story("Search for a job on Indeed")
      @DisplayName("Positive Test, search job on Indeed without registration")
-
-  void successfulSearchJobWihoutLogin(){
+     void successfulSearchJobWihoutLogin(){
         parameter(" Job for searching:", jobIndeed);
         parameter("Where`re we looking for the job:", whereJobIndeed);
 
-
-        steps.openUrlIndeed(urlIndeed);
-//        steps.inputInLoginFormIndeed(emailIndeed,passwordIndeed);
-//        steps.loginVerificationIndeed(emailIndeed);
-
+        step("Open main page", () -> {
+            open(urlIndeed);
+        });
         step("Input jobname  and region into the search field",()->{
             $("#text-input-what").setValue(jobIndeed);
             $("#text-input-where").setValue(whereJobIndeed).pressEnter();
@@ -67,7 +64,10 @@ public class IndeedTest extends TestBase {
             $("body").shouldHave(text(jobIndeed));
         });
 
-  }
+    }
+/*
+                TESTS WITH FREQUENTLY USED STEPS
+ */
     @Test
     @Story("Search for a job on Indeed")
     @DisplayName("Positive Test, save first vacancy in the account")
@@ -75,6 +75,7 @@ public class IndeedTest extends TestBase {
     void successfullSaveVacancy(){
         parameter(" Job for searching:", jobIndeed);
         parameter("Where`re we looking for the job:", whereJobIndeed);
+
 
         steps.openUrlIndeed(urlIndeed);
         steps.inputInLoginFormIndeed(emailIndeed,passwordIndeed);
@@ -93,18 +94,14 @@ public class IndeedTest extends TestBase {
         step("Сlick on the heart to save the vacancy",()->{
             $(".state-picker-button").click();
         });
-
-       String jobSaved=  $("#vjs-jobinfo>div").sibling(0).getText();
-
+        step("Remember the first search result", ()-> {
+           jobSaved=  $("#vjs-jobinfo [id=vjs-cn]").getText();
+        });
         step(" Check the account that the vacancy is saved",()->{
              $(".gnav-ProfileNavLinks>div").sibling(0).click();
              $(".gnav-AccountMenu a").sibling(0).click();
              $("body").shouldHave(text(jobSaved));
         });
-
-
-//         sleep(6000);
     }
-
 
 }

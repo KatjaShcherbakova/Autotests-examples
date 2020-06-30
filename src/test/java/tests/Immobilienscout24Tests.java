@@ -102,7 +102,7 @@ public class Immobilienscout24Tests extends TestBase{
         iScoutPage.inputApartParametersForSearchAuth(townIScout, maxPriceIScout,roomsIScout,distanceiScout, minAreaIScout);
 
         assertTrue (true);
-
+// should to do
 //        iScoutPage.assertSuccessfulSearch();
 //        iScoutPage.saveNameOfFirstResult();
 //        iScoutPage.clickHeartSignInFirstResult();

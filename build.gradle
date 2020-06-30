@@ -59,8 +59,6 @@ task file_tests(type: Test) {
         includeTags 'file'
     }
 }
-
-
 task yandex_tests(type: Test) {
     useJUnitPlatform {
         includeTags 'yandex'
@@ -71,7 +69,6 @@ task tinkoff_tests(type: Test) {
         includeTags 'tinkoff'
     }
 }
-
 task indeed_tests(type: Test) {
     useJUnitPlatform {
         includeTags 'indeed'
@@ -80,6 +77,16 @@ task indeed_tests(type: Test) {
 task iscout_tests(type: Test) {
     useJUnitPlatform {
         includeTags 'iscout'
+    }
+}
+task ap_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags 'a_practice'
+    }
+}
+task auth_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags 'auth'
     }
 }
 task some_tests(type: Test) {
