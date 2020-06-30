@@ -3,30 +3,32 @@ package tests;
 
 import Pages.IScoutPage;
 import basicSteps.AuthIScout;
-import com.codeborne.selenide.Configuration;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static helpers.Environment.*;
 import static io.qameta.allure.Allure.step;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Feature("Work with profile")
 @Tag("iscout")
 public class Immobilienscout24Tests extends TestBase{
 
-    private final AuthIScout steps= new AuthIScout();
 
+    private final AuthIScout steps= new AuthIScout();
+    private final IScoutPage iScoutPage = new IScoutPage();
+
+//              Test with plain steps
     @Test
     @Story("Authorisation")
     @DisplayName("Positive test, authorisation of already registered user ")
-    //Test with plain steps
     void successfulAuthoficationIScout() {
         step("Open main page Immobilienscout24", ()-> {
             open(urlIScout);
@@ -49,6 +51,8 @@ public class Immobilienscout24Tests extends TestBase{
             $("body").shouldHave(text(emailIScout));
         });
     }
+
+//              Tests with plain steps and most frequently used steps
 
     @Test
     @Story("Profile changes")
@@ -86,22 +90,29 @@ public class Immobilienscout24Tests extends TestBase{
     }
 
     @Test
-    @Story("Saving search results in a profile")
-    @DisplayName("Positive search for an apartment by parameters and save the first result in the profile")
-    void successfulSearchAndSaveResult () {
-        Configuration.fastSetValue=true;
-
-        IScoutPage iScoutPage = new IScoutPage();
-
-        iScoutPage.openMainPageIScout(urlIScout);
+    @Story("Check the top menu in the profile")
+    @DisplayName("Go to the search page from the top menu")
+    void successfulSwitchToSearchFromProfile() {
+        iScoutPage.openPageIScout(urlIScout);
         iScoutPage.inputAuthData(emailIScout,passwordIScout);
         iScoutPage.assertAuth(emailIScout);
-//        iScoutPage.hoverTopMenuForSearch();
-//        iScoutPage.clickSubMenuApartmentForRent();
-        iScoutPage.openSearchPageAfterAuth(urlPageSearchAfterAuthIScout);
-        iScoutPage.inputApartParametersForSearchAuth(townIScout, maxPriceIScout,roomsIScout,distanceiScout, minAreaIScout);
+        iScoutPage.hoverTopMenuForSearch();
+        iScoutPage.clickSubMenuApartmentForRent();
+        iScoutPage.checkPageForText("Mietwohnung suchen");
 
-        assertTrue (true);
+    }
+
+    @Test
+    @Story("Saving search results in a profile with pre-authorisation")
+    @DisplayName("Positive search for an apartment by parameters and save the first result in the profile")
+    void successfulSearchAndSaveResult () {
+        iScoutPage.openPageIScout(urlIScout);
+        iScoutPage.inputAuthData(emailIScout,passwordIScout);
+        iScoutPage.assertAuth(emailIScout);
+        iScoutPage.openPageIScout(urlPageSearchAfterAuthIScout);
+        iScoutPage.inputApartParametersForSearchAuth
+                (townIScout, maxPriceIScout,roomsIScout,distanceiScout, minAreaIScout);
+
 // should to do
 //        iScoutPage.assertSuccessfulSearch();
 //        iScoutPage.saveNameOfFirstResult();
@@ -113,18 +124,22 @@ public class Immobilienscout24Tests extends TestBase{
     @Story("Search for an apartment by parameters without authorisation")
     @DisplayName("Positive serch for an apartment by parameters without authorisation")
     void successfulSearchApartmentWithoutAuth() {
-        Configuration.fastSetValue=true;
-
-        IScoutPage iScoutPage = new IScoutPage();
-
-        iScoutPage.openMainPageIScout(urlIScout);
+        iScoutPage.openPageIScout(urlIScout);
         iScoutPage.inputApartParametersWithoutAuth(townIScout, maxPriceIScout,roomsIScout,minAreaIScout,distanceiScout);
-
-        assertTrue (true);
-
+//here should be Assert
     }
 
+    @Test
+    @Story("Checking the availability of files for download, section-'Umziehen'")
+    @DisplayName("Positive test, download und check PDF file 'Mietschuldenfreiheitsbescheinigung'")
+    void successfulCheckPDFFile() throws IOException {
+//        String expectedText = "Mietsgfgfggfng";
+        String expectedText = "Mietschuldenfreiheitsbescheinigung";
 
+        iScoutPage.openPageIScout(urlMoving);
+        iScoutPage.downloadPDFFileAndCheck(expectedText);
+
+    }
 
 }
 

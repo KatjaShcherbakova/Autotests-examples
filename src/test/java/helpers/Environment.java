@@ -12,10 +12,11 @@ public class Environment {
         whereJobIndeed = System.getProperty("jobRegionIndeed","Deutschland"),
 
         urlIScout = System.getProperty("urlIScout","https://www.immobilienscout24.de/"),
+        urlMoving = System.getProperty("urlMoving","https://www.immobilienscout24.de/umzug/ratgeber/vorlagen.html"),
+        urlPageSearchAfterAuthIScout = System.getProperty("urlPageForSearchAfterAuth","https://www.immobilienscout24.de/wohnen/mietwohnungen.html"),
         emailIScout = System.getProperty("emailIScout","cherrycat+22@mail.ru"),
         passwordIScout = System.getProperty("passwordIScout","Polyris123!123"),
 
-        urlPageSearchAfterAuthIScout = System.getProperty("urlPageForSearchAfterAuth","https://www.immobilienscout24.de/wohnen/mietwohnungen.html"),
         townIScout = System.getProperty("townIScout","Berlin"),
         maxPriceIScout = System.getProperty("maxPriceIScout","1200"),
         roomsIScout = System.getProperty("roomsIScout","2"),

@@ -1,11 +1,16 @@
 package Pages;
 
+import com.codeborne.pdftest.PDF;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
+
+import java.io.File;
+import java.io.IOException;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class IScoutPage {
 
@@ -33,11 +38,14 @@ public class IScoutPage {
         fieldRoomsWithoutAuth = $(".oss-rooms"),
         fieldDistanceWithoutAuth = $(".oss-radius"),
         fieldAreaWithoutAuth = $(".oss-area"),
-        submitButtonWithoutAuth = $(by("type", "button"));
+        submitButtonWithoutAuth = $(by("type", "button")),
+        filePDF = $(byText("Mietschuldenfreiheitsbestätigung"));
+
+
 
 
     @Step("Open main page Immobilienscout24")
-    public void openMainPageIScout(String url) {
+    public void openPageIScout(String url) {
         open(url);
     }
 
@@ -51,31 +59,24 @@ public class IScoutPage {
     }
 
     @Step("Assert the authorisation is succesful")
-    public void assertAuth(String mail)
-    {
+    public void assertAuth(String mail) {
         htmlBody.shouldHave(text(mail));
     }
-
     @Step("Hover on 'Suchen' on top menu")
-    public void hoverTopMenuForSearch()
-    {
+    public void hoverTopMenuForSearch() {
         searchLink.hover().click();
     }
-
     @Step("Click submenu -'Mietwohnung' ")
-    public void clickSubMenuApartmentForRent()
-    {
+    public void clickSubMenuApartmentForRent() {
         subMenuApartmentForRent.click();
     }
-
-    @Step("Open page after authorisation for searching apartments")
-    public void openSearchPageAfterAuth(String url) {
-        open(url);
+    @Step("Check for text on page")
+    public void checkPageForText(String text) {
+        htmlBody.shouldHave(text(text));
     }
-
-    @Step("Input parameters for searching")
-    public void inputApartParametersForSearchAuth(String town, String maxPrice, String rooms, String distance, String minArea)
-    {
+    @Step("Entering parameters for apartment search with pre-authorization")
+    public void inputApartParametersForSearchAuth
+            (String town, String maxPrice, String rooms, String distance, String minArea) {
         fieldTownAuth.setValue(town);
         fieldTownAuth.pressTab();
 
@@ -86,36 +87,35 @@ public class IScoutPage {
         sleep(6000);
         SelenideElement room = dropdownRooms.$(byText("ab " + rooms));
         room.click();
-        room.parent().click();
         String sr = room.getText();
         System.out.println(sr);
-//        sleep(2000);
+
+//         variant to locate value
 //        dropdownRooms.$(by("data-value",rooms)).click();
-//        sleep(2000);
-//        fieldRoomsAuth.find(".oss-dropdown-button>span").click();
 
-//        for(SelenideElement element:bootstrapRoomsAuth) {
-//            String innerhtml = element.getAttribute("innerHTML");
-//            System.out.println("Value from dropdown=====" + innerhtml);
-//
-//            if (innerhtml.contentEquals("ab " + rooms)) {
-//                element.click();
-//            }
-//        }
 
+/*       loop and if realisation
+        for(SelenideElement element:bootstrapRoomsAuth) {
+            String innerhtml = element.getAttribute("innerHTML");
+            System.out.println("Value from dropdown=====" + innerhtml);
+
+            if (innerhtml.contentEquals("ab " + rooms)) {
+                element.click();
+            }
+       }
+*/
         fieldDistanceAuth.find(".oss-dropdown-button").click();
-        dropdownDistance.find("li[data-value*='10']").click();
+        dropdownDistance.$(withText(distance)).click();
 //        dropdownDistance.$(byText(distance + " km")).click();
-
 
         fieldAreaAuth.setValue(minArea);
         fieldAreaAuth.pressTab();
-
         submitButtonAuth.click();
     }
 
-    @Step("")
-    public void inputApartParametersWithoutAuth(String town, String maxPrice, String rooms, String minArea, String distance) {
+    @Step("Entering parameters for finding an apartment without pre-authorization")
+    public void inputApartParametersWithoutAuth
+            (String town, String maxPrice, String rooms, String minArea, String distance) {
         fieldTownWithoutAuth.setValue(town).pressTab();
         fieldPriceWithoutAuth.setValue(maxPrice).pressTab();
         fieldRoomsWithoutAuth.click();
@@ -126,6 +126,15 @@ public class IScoutPage {
         submitButtonWithoutAuth.click();
 
     }
+    @Step("Download the PDF file und check it for expected text")
+    public void downloadPDFFileAndCheck(String text) throws IOException, NullPointerException {
+        File actuelFile= filePDF.download();
+        PDF pdf = new PDF(actuelFile);
+
+        assertThat(pdf, PDF.containsText(text));
+
+    }
+
 
 }
 
