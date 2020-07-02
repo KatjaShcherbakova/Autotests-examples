@@ -12,13 +12,13 @@ import static io.qameta.allure.Allure.parameter;
 
 public class BaseStepsIndeed {
 
-
     @Step ("Open main Indeed webpage")
     public void openUrlIndeed(String url){
         parameter ("url Indeed:", url);
         open(url);
     }
-    @Step ("Input email and password in the login form")
+
+    @Step ("Fill the login form")
     public void inputInLoginFormIndeed(String mail, String password){
         parameter("email Indeed:", mail);
         parameter("password Indeed",password);
@@ -28,6 +28,7 @@ public class BaseStepsIndeed {
         $("#login-password-input").setValue(password);
         $("#login-submit-button").click();
     }
+
     @Step ("Login verification")
     public void loginVerificationIndeed(String mail){
         $(by("aria-label","Toggle menu")).click();

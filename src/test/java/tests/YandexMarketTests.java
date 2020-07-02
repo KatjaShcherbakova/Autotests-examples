@@ -2,6 +2,7 @@ package tests;
 
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -14,32 +15,31 @@ import static helpers.Environment.urlYandexMarket;
 import static io.qameta.allure.Allure.parameter;
 import static io.qameta.allure.Allure.step;
 
+
 @Feature("Search item on YandexMarket")
 @Tag("yandex")
 public class YandexMarketTests extends TestBase {
-//    @Disabled
+
+    @Disabled
     @Test
     @Story("Searching item on YandexMarket")
     @DisplayName("Positive test by searching item on YandexMarket")
-    void succesfulSearchYandexMarket (){
-
+    void succesfulSearchYandexMarket () {
         parameter("Item for search:", itemYandexMarket);
 
-        step("Open the main page",()-> {
-            open(urlYandexMarket);
-        });
-        step ("Input itemYandexMarket in the search bar",()-> {
+        step("Open the main page", ()->
+            open(urlYandexMarket)));
+
+        step ("Input itemYandexMarket in the search bar", () -> {
             $(byName("text")).val(itemYandexMarket);
             sleep(5000);
             $(byName("text")).pressEnter();
         });
-        step("Click the first link",()->{
-            $("[data-autotest-id='product-snippet'] img").click();
-        });
-        step("Search the result, it should have itemYandexMarket",()-> {
-            switchTo().window(1);
-            $("html").shouldHave(text(itemYandexMarket));
-        });
+        step("Click the first link", () ->
+            $("[data-autotest-id='product-snippet'] img").click());
+
+        step("Check that the search result contains the \"{itemYandexMarket}\"", () ->
+            $("html").shouldHave(text(itemYandexMarket)));
 
     }
 

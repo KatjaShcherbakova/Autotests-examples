@@ -1,6 +1,5 @@
 package tests;
 
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.xlstest.XLS;
 import io.qameta.allure.Feature;
@@ -19,38 +18,35 @@ import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+
 @Feature("Work with files")
 @Tag("file")
 @Tag("exel")
-
-
 public class TestFileVerification extends TestBase {
 
     @Test
     @Story("EXEL file test")
     @DisplayName("Positive test, download und  search for the text in the EXEL file")
-
     void successfulSearchTextinFileExel()  throws IOException {
-
         String expectedFileText = "Черепанова";
         String jenkinsLogin = "testuser";
         String jenkinsPassword = "testpassword%";
 
-        step("Open main webpage and login", ()-> {
+        step("Open main webpage and login", () -> {
             open("https://jenkins.autotests.cloud/login");
             $(byName("j_username")).val(jenkinsLogin);
             $(byName("j_password")).val(jenkinsPassword).pressEnter();
             $(withText(jenkinsLogin)).shouldBe(Condition.visible);
-                });
-
-        step("Open the page with files",()->{
-            open("https://jenkins.autotests.cloud/job/Katja_AllTests/ws/src/test/resources/");
         });
 
-        step("Download the file, read the text from it and check the actual file text with the expected file text"
-                ,()->{
+        step("Open the page with files", () ->
+            open("https://jenkins.autotests.cloud/job/Katja_AllTests/ws/src/test/resources/"));
+
+        step("Download the file, read the text from it and check the actual file text with the expected file text",
+                () -> {
              File actuelFile= $("[href='ExelTestFile.xlsx']").download();
              XLS xls = new XLS(actuelFile);
+
              assertThat(xls, XLS.containsText(expectedFileText));
         });
 
